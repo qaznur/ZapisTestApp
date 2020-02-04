@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="salon"
+                type="kz.nura.zapistestapp.domain.Salon"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/salon_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+            <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    app:imageUrl="@{salon.pictureUrl}"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="@id/container"
+                    app:layout_constraintTop_toTopOf="@id/container"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[19]"/>
+
+            <TextView
+                    android:id="@+id/salon_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{salon.type}"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toEndOf="@id/image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Салон красоты"/>
+
+            <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{salon.name}"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toBottomOf="@+id/salon_type"
+                    app:layout_constraintStart_toStartOf="@+id/salon_type"
+                    tools:text="Samal beauty"/>
+
+            <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{String.valueOf(salon.checkRating)}"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    app:layout_constraintStart_toStartOf="@+id/name"
+                    tools:text="4.8"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
