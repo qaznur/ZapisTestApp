@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import kz.nura.zapistestapp.R
@@ -22,22 +21,26 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
+    private lateinit var adapter: CatalogListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-
-        val adapter = CatalogListAdapter()
+        adapter = CatalogListAdapter(CatalogListAdapter.ClickListenerImpl(context))
         binding.catalogList.adapter = adapter
         binding.catalogList.layoutManager = LinearLayoutManager(context)
 
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.salons.observe(viewLifecycleOwner, Observer { salons ->
-            Log.d("###", "salons: ${salons.toString()}")
+//            Log.d("###", "salons: ${salons.toString()}")
             adapter.submitList(salons)
         })
-        return binding.root
     }
 
 }

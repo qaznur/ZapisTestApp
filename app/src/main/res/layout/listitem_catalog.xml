@@ -9,6 +9,10 @@
         <variable
                 name="salon"
                 type="kz.nura.zapistestapp.domain.Salon"/>
+
+        <variable
+                name="clickListener"
+                type="kz.nura.zapistestapp.adapters.CatalogListAdapter.ClickListener"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -70,6 +74,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/name"
                     app:layout_constraintStart_toStartOf="@+id/name"
                     tools:text="4.8"/>
+
+            <View
+                    android:id="@+id/clickable_view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:onClick="@{() -> clickListener.onClicked(salon)}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

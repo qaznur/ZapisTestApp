@@ -9,6 +9,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 const val DOMAIN = "http://zp.jgroup.kz"
 const val BASE_URL = "http://zp.jgroup.kz/rest/v1/"
@@ -16,6 +18,9 @@ const val BASE_URL = "http://zp.jgroup.kz/rest/v1/"
 interface NetworkService {
     @GET("salon/getPopular")
     fun getPopularSalons(): Deferred<NetworkResponse>
+
+    @GET("salon/page?")
+    fun getSalon(@Query("id") id: Long): Deferred<NetworkSalonResponse>
 }
 
 object Network {
@@ -28,6 +33,8 @@ object Network {
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(logging)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS)
         .build()
 
     private val retrofit = Retrofit.Builder()

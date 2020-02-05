@@ -1,5 +1,6 @@
 package kz.nura.zapistestapp.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.launch
 import kz.nura.zapistestapp.SalonRepository
@@ -16,6 +17,9 @@ class HomeViewModel : BaseViewModel() {
         }
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("###", "onCleared")
+    }
 
 }

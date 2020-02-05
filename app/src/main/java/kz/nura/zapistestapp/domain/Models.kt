@@ -7,3 +7,17 @@ data class Salon(
     val checkRating: Double,
     val pictureUrl: String?
 )
+
+data class SalonDetail(
+    val id: Long,
+    val name: String,
+    val address: String,
+    val pictures: List<String>,
+    val services: List<SalonServices>
+)
+
+data class SalonServices(
+    val id: Long,
+    val name: String,
+    val price: Int
+)
