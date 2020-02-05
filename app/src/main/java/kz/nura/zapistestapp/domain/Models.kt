@@ -13,10 +13,10 @@ data class SalonDetail(
     val name: String,
     val address: String,
     val pictures: List<String>,
-    val services: List<SalonServices>
+    val services: List<SalonService>
 )
 
-data class SalonServices(
+data class SalonService(
     val id: Long,
     val name: String,
     val price: Int

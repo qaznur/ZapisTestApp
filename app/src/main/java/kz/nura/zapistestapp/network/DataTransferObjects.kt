@@ -2,7 +2,7 @@ package kz.nura.zapistestapp.network
 
 import kz.nura.zapistestapp.domain.Salon
 import kz.nura.zapistestapp.domain.SalonDetail
-import kz.nura.zapistestapp.domain.SalonServices
+import kz.nura.zapistestapp.domain.SalonService
 
 data class NetworkResponse(
     val salons: List<NetworkSalon>
@@ -47,9 +47,9 @@ fun NetworkResponse.asDomainModel(): List<Salon> {
     }.toList()
 }
 
-fun List<NetworkSalonService>.asDomainModel(): List<SalonServices> {
+fun List<NetworkSalonService>.asDomainModel(): List<SalonService> {
     return map {
-        SalonServices(
+        SalonService(
             id = it.id,
             name = it.name,
             price = it.price
