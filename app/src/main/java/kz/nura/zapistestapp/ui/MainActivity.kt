@@ -29,9 +29,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.navView.setOnNavigationItemSelectedListener(navListener)
-//        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        Log.d("###", "home: ${supportFragmentManager.fragments.size}")
 
         initFragments()
     }

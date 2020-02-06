@@ -25,17 +25,17 @@ class SalonRepository(application: Application) : AbstractSafeApiRequest(applica
 
     suspend fun loadSalons() {
         withContext(Dispatchers.IO) {
+            _salons.postValue(null)
             val response = apiRequest { Network.apiService.getPopularSalons() }
             _salons.postValue(response?.asDomainModel())
-            Log.d("###", "repo salons: $salons")
         }
     }
 
     suspend fun loadSalon(id: Long) {
         withContext(Dispatchers.IO) {
-            val response = Network.apiService.getSalon(id).await()
-            _salonDetail.postValue(response.asDomainModel())
-            Log.d("###", "repo salonDetail: $salonDetail")
+            _salonDetail.postValue(null)
+            val response = apiRequest { Network.apiService.getSalon(id) }
+            _salonDetail.postValue(response?.asDomainModel())
         }
     }
 }

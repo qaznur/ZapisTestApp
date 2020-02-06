@@ -6,12 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide.init
 import kotlinx.coroutines.launch
 import kz.nura.zapistestapp.SalonRepository
 import kz.nura.zapistestapp.domain.SalonDetail
 
-class DetailsViewModel(id: Long?, application: Application) : BaseViewModel() {
+class DetailsViewModel(private val id: Long?, application: Application) : BaseViewModel() {
 
     private val repository = SalonRepository(application)
 
@@ -21,13 +20,29 @@ class DetailsViewModel(id: Long?, application: Application) : BaseViewModel() {
     val imageUrls: LiveData<List<String>>
         get() = _imageUrls
 
+    private val _exception: MutableLiveData<Exception> = MutableLiveData()
+    val exception: LiveData<Exception>
+        get() = _exception
+
     init {
+        refresh()
+    }
+
+    fun refresh() {
         mainScope.launch {
-            id?.let {
-                repository.loadSalon(id)
-                _imageUrls.value = salonDetail.value?.pictures
+            try {
+                id?.let {
+                    repository.loadSalon(id)
+                    _imageUrls.value = salonDetail.value?.pictures
+                }
+            } catch (ex: Exception) {
+                _exception.value = ex
             }
         }
+    }
+
+    fun onSetNoException() {
+        _exception.value = null
     }
 
     class Factory(private val id: Long?, private val application: Application) : ViewModelProvider.Factory {

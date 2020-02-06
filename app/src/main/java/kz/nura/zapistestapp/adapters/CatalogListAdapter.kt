@@ -64,7 +64,6 @@ class CatalogListAdapter(private val clickListener: ClickListener) :
 
         override fun onClicked(salon: Salon) {
             context?.let {
-                Log.d("#####", "ClickListenerImpl id: ${salon.id}")
                 val intent = Intent(context, DetailsActivity::class.java)
                 intent.putExtra("id", salon.id)
                 context.startActivity(intent)

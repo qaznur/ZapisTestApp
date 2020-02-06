@@ -21,7 +21,7 @@ interface NetworkService {
     suspend fun getPopularSalons(): Response<NetworkResponse>
 
     @GET("salon/page?")
-    fun getSalon(@Query("id") id: Long): Deferred<NetworkSalonResponse>
+    suspend fun getSalon(@Query("id") id: Long): Response<NetworkSalonResponse>
 }
 
 object Network {

@@ -28,7 +28,6 @@ class HomeViewModel(application: Application) : BaseViewModel() {
             try {
                 repository.loadSalons()
             } catch (ex: Exception) {
-                Log.d("### error", "${ex.message}")
                 _exception.value = ex
             }
         }

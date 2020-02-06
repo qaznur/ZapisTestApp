@@ -2,6 +2,7 @@ package kz.nura.zapistestapp.ui.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var factory: HomeViewModel.Factory
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -42,18 +43,25 @@ class HomeFragment : Fragment() {
 
         factory = HomeViewModel.Factory(activity!!.application)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
+        setViewModelObserves()
+    }
+
+    private fun setViewModelObserves() {
         viewModel.salons.observe(viewLifecycleOwner, Observer { salons ->
-            if(salons == null) {
+            if (salons == null) {
                 binding.loadProgressBar.visibility = View.VISIBLE
+                binding.loadErrorLayout.visibility = View.GONE
             } else {
                 binding.loadErrorLayout.visibility = View.GONE
+                binding.loadProgressBar.visibility = View.GONE
                 viewModel.onSetNoException()
             }
             adapter.submitList(salons)
         })
 
         viewModel.exception.observe(viewLifecycleOwner, Observer { ex ->
-            if(ex == null) {
+            if (ex == null) {
                 binding.loadErrorLayout.visibility = View.GONE
             } else {
                 when (ex) {
@@ -73,10 +81,6 @@ class HomeFragment : Fragment() {
                 binding.loadProgressBar.visibility = View.GONE
                 binding.loadErrorLayout.visibility = View.VISIBLE
             }
-//            ex?.let {
-//                Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
-//                viewModel.onSetNoException()
-//            }
         })
     }
 
