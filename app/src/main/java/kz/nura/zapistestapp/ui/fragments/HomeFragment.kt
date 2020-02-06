@@ -57,9 +57,18 @@ class HomeFragment : Fragment() {
                 binding.loadErrorLayout.visibility = View.GONE
             } else {
                 when (ex) {
-                    is NoInternetException -> {binding.errorMessage.text = getString(R.string.no_internet_error)}
-                    is ServerException -> {binding.errorMessage.text = getString(R.string.server_error)}
-                    is UnknownError -> {binding.errorMessage.text = getString(R.string.unknown_error)}
+                    is NoInternetException -> {
+                        binding.errorMessage.text = getString(R.string.no_internet_error)
+                        binding.refresh.visibility = View.VISIBLE
+                    }
+                    is ServerException -> {
+                        binding.errorMessage.text = getString(R.string.server_error)
+                        binding.refresh.visibility = View.GONE
+                    }
+                    is UnknownError -> {
+                        binding.errorMessage.text = getString(R.string.unknown_error)
+                        binding.refresh.visibility = View.GONE
+                    }
                 }
                 binding.loadProgressBar.visibility = View.GONE
                 binding.loadErrorLayout.visibility = View.VISIBLE

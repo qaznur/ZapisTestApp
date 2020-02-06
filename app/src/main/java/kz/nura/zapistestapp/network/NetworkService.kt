@@ -17,7 +17,7 @@ const val DOMAIN = "http://zp.jgroup.kz"
 const val BASE_URL = "http://zp.jgroup.kz/rest/v1/"
 
 interface NetworkService {
-    @GET("salon/getPopularr")
+    @GET("salon/getPopular")
     suspend fun getPopularSalons(): Response<NetworkResponse>
 
     @GET("salon/page?")
