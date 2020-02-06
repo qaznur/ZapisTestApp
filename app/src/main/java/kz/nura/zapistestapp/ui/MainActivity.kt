@@ -17,7 +17,7 @@ import kz.nura.zapistestapp.viewmodels.HomeViewModel
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: HomeViewModel
+//    private lateinit var viewModel: HomeViewModel
 
     private val fm = supportFragmentManager
     private lateinit var homeFragment: Fragment
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.navView.setOnNavigationItemSelectedListener(navListener)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+//        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         Log.d("###", "home: ${supportFragmentManager.fragments.size}")
 
@@ -81,14 +81,17 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 loadFragment(homeFragment)
+                title = getString(R.string.home_fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
                 loadFragment(searchFragment)
+                title = getString(R.string.search_fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
                 loadFragment(profileFragment)
+                title = getString(R.string.profile_fragment)
                 return@OnNavigationItemSelectedListener true
             }
         }

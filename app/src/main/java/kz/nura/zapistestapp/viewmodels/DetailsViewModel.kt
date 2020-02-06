@@ -1,5 +1,6 @@
 package kz.nura.zapistestapp.viewmodels
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,10 +11,12 @@ import kotlinx.coroutines.launch
 import kz.nura.zapistestapp.SalonRepository
 import kz.nura.zapistestapp.domain.SalonDetail
 
-class DetailsViewModel(id: Long?) : BaseViewModel() {
+class DetailsViewModel(id: Long?, application: Application) : BaseViewModel() {
 
-    private val repository = SalonRepository()
+    private val repository = SalonRepository(application)
+
     val salonDetail: LiveData<SalonDetail> = repository.salonDetail
+
     private val _imageUrls: MutableLiveData<List<String>> = MutableLiveData()
     val imageUrls: LiveData<List<String>>
         get() = _imageUrls
@@ -27,16 +30,11 @@ class DetailsViewModel(id: Long?) : BaseViewModel() {
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("###", "onCleared")
-    }
-
-    class Factory(private val id: Long?) : ViewModelProvider.Factory {
+    class Factory(private val id: Long?, private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return DetailsViewModel(id) as T
+                return DetailsViewModel(id, application) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

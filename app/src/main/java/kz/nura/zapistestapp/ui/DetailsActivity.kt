@@ -23,11 +23,14 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details)
         binding.lifecycleOwner = this
 
         val salonId = intent.extras?.getLong("id")
-        factory = DetailsViewModel.Factory(salonId)
+        factory = DetailsViewModel.Factory(salonId, application)
 
         val pagerAdapter = PagerAdapter(
             this, listOf(), false
@@ -36,7 +39,6 @@ class DetailsActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, factory).get(DetailsViewModel::class.java)
         viewModel.imageUrls.observe(this, Observer { imageUrls ->
-            Log.d("#####", "imageUrls: $imageUrls")
             pagerAdapter.setItemList(imageUrls)
             binding.pageIndicatorView.count = imageUrls.size
             binding.viewpager.reset()
@@ -72,5 +74,10 @@ class DetailsActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         binding.viewpager.pauseAutoScroll()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

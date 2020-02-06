@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp">
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container"
@@ -29,25 +31,35 @@
                 android:layout_height="match_parent"
                 android:padding="8dp">
 
-            <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    app:imageUrl="@{salon.pictureUrl}"
-                    android:scaleType="centerCrop"
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/image_card"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:cardCornerRadius="8dp"
                     app:layout_constraintStart_toStartOf="@id/container"
-                    app:layout_constraintTop_toTopOf="@id/container"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[19]"/>
+                    app:layout_constraintTop_toTopOf="@id/container">
+
+                <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:imageUrl="@{salon.pictureUrl}"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="w,1:1"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[19]"/>
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                     android:id="@+id/salon_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{salon.type}"
+                    android:textSize="14sp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toEndOf="@id/image"
+                    app:layout_constraintStart_toEndOf="@id/image_card"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Салон красоты"/>
 
@@ -55,11 +67,11 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:text="@{salon.name}"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@+id/salon_type"
                     app:layout_constraintStart_toStartOf="@+id/salon_type"
                     tools:text="Samal beauty"/>
@@ -68,9 +80,10 @@
                     android:id="@+id/rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="4dp"
                     android:text="@{String.valueOf(salon.checkRating)}"
                     android:textSize="14sp"
+                    android:textColor="@color/gold"
                     app:layout_constraintTop_toBottomOf="@+id/name"
                     app:layout_constraintStart_toStartOf="@+id/name"
                     tools:text="4.8"/>
@@ -84,6 +97,16 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                    android:id="@+id/rating_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_star"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintStart_toEndOf="@+id/rating"
+                    app:layout_constraintTop_toTopOf="@+id/rating"
+                    app:layout_constraintBottom_toBottomOf="@+id/rating"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

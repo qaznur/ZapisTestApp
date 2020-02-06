@@ -5,9 +5,15 @@
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
 
-    <string name="home_fragment">Home fragment</string>
-    <string name="search_fragment">Search fragment</string>
-    <string name="profile_fragment">Profile fragment</string>
+    <string name="home_fragment">Салоны</string>
+    <string name="search_fragment">Поиск</string>
+    <string name="profile_fragment">Профиль</string>
     <string name="beauty_salon">Салон красоты</string>
+    <string name="service_list">Список услуг</string>
+
+    <string name="refresh">Обновить</string>
+    <string name="no_internet_error">Нет подключения к сети</string>
+    <string name="server_error">Ошибка на сервере</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
 
 </resources>
